@@ -56,7 +56,4 @@ jobs:
         echo "Ensure your cloud environment also has access to MongoDB Atlas and sets JWT_SECRET, MONGODB_URI correctly as environment variables."
       env:
         # Pass secrets for deployment (if they were used here)
-        # For a real deployment, you'd configure your server/cloud service with these secrets.
-        # JWT_SECRET: ${{ secrets.JWT_SECRET }}
-        # MONGODB_URI: ${{ secrets.MONGODB_URI }}
-        # You might need SSH_HOST, SSH_USERNAME, SSH_PRIVATE_KEY for VPS deployments
+         
