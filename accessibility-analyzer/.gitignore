@@ -1,0 +1,47 @@
+# ----------------------------------------
+# Node.js dependencies
+/node_modules/
+**/node_modules/
+
+# Yarn & PnP
+/.pnp
+.pnp.js
+
+# Testing
+/coverage/
+
+# Production builds
+/build/
+/dist/
+/out/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# OS-specific
+.DS_Store
+
+# Editor/IDE settings
+.vscode/
+.idea/
+
+# Environment files
+.env
+.env.*
+!.env.example   # Allow only example to be committed
+
+# Database files
+*.sqlite3
+*.db
+*.db3
+
+# Temp files
+*.tmp
+*.temp
+
+# Docker
+**/.env         # Ignore .env inside frontend/backend
+docker.env      # If used

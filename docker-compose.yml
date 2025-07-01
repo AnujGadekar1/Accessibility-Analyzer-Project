@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  # MongoDB service
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_analyzer
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db  
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-admin}  
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-password}  
+    
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.runCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+ 
+  backend:
+    build: ./backend  
+    container_name: analyzer_backend
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: production  
+      PORT: 3001
+       
+      MONGODB_URI: mongodb://mongodb:27017/accessibility_analyzer_db  
+      JWT_SECRET: ${JWT_SECRET}  
+    depends_on:
+      mongodb:
+        condition: service_healthy  
+    volumes:
+      - ./backend:/app/backend  
+      - /app/backend/node_modules  
+
+  # Frontend service
+  frontend:
+    build: ./accessibility-analyzer  
+    container_name: analyzer_frontend
+    ports:
+      - "3000:80"  
+    environment:
+     
+      REACT_APP_API_URL: http://backend:3001/api  
+    
+
+volumes:
+  mongodb_data: 
