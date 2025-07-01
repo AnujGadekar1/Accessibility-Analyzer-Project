@@ -10,8 +10,8 @@ services:
     volumes:
       - mongodb_data:/data/db  
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-admin}  
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-password}  
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME }  
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD }  
     
     healthcheck:
       test: ["CMD", "mongosh", "--eval", "db.runCommand('ping').ok"]
@@ -46,7 +46,7 @@ services:
       - "3000:80"  
     environment:
      
-      REACT_APP_API_URL: http://backend:3001/api  
+      REACT_APP_API_URL: http://backend:  
     
 
 volumes:
